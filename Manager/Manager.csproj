@@ -193,8 +193,10 @@
     <Compile Include="Areas\Administrator\Controllers\DepartmentsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\DesignationsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\EmployeesController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ManageAdmissionNumbersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ParentsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\StreamsController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\StudentClassesController.cs" />
     <Compile Include="Areas\HumanResource\HumanResourceAreaRegistration.cs" />
     <Compile Include="Areas\Inventory\InventoryAreaRegistration.cs" />
     <Compile Include="Areas\Library\LibraryAreaRegistration.cs" />
@@ -286,9 +288,11 @@
     <Folder Include="Areas\Administrator\Views\Departments\" />
     <Folder Include="Areas\Administrator\Views\Designations\" />
     <Folder Include="Areas\Administrator\Views\Employees\" />
+    <Folder Include="Areas\Administrator\Views\ManageAdmissionNumbers\" />
     <Folder Include="Areas\Administrator\Views\Parents\" />
     <Folder Include="Areas\Administrator\Views\Shared\" />
     <Folder Include="Areas\Administrator\Views\Streams\" />
+    <Folder Include="Areas\Administrator\Views\StudentClasses\" />
     <Folder Include="Areas\HumanResource\Controllers\" />
     <Folder Include="Areas\HumanResource\Data\" />
     <Folder Include="Areas\HumanResource\Views\Shared\" />

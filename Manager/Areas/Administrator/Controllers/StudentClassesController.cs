@@ -1,5 +1,5 @@
-﻿using Manager.Data.DTOs.StreamModule;
-using Manager.Data.Services.StreamModule;
+﻿using Manager.Data.DTOs.SchoolClasseModule;
+using Manager.Data.Services.SchoolClasseModule;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,30 +10,30 @@ using System.Web.Mvc;
 
 namespace Manager.Areas.Administrator.Controllers
 {
-    public class StreamsController : Controller
+    public class StudentClassesController : Controller
     {
-        private readonly IStreamService streamService;
-        public StreamsController(IStreamService streamService)
+        private readonly ISchoolClassService  schoolClassService;
+        public StudentClassesController(ISchoolClassService schoolClassService)
         {
-            this.streamService = streamService;
+            this.schoolClassService = schoolClassService;
         }
         public ActionResult Index()
         {
             return View();
         }
-        public async Task<ActionResult> Create(StreamDTO streamDTO)
+        public async Task<ActionResult> Create(SchoolClassDTO schoolClassDTO)
         {
             try
             {
                 var user = User.Identity.GetUserId();
 
-                streamDTO.CreatedBy = user;
+                schoolClassDTO.CreatedBy = user;
 
-                var results = await streamService.Create(streamDTO);
+                var results = await schoolClassService.Create(schoolClassDTO);
 
                 if (results != null)
                 {
-                    return Json(new { success = true, responseText = "Stream has been successfully created" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = true, responseText = "Class has been successfully created" }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -47,11 +47,11 @@ namespace Manager.Areas.Administrator.Controllers
                 return null;
             }
         }
-        public async Task<ActionResult> Update(StreamDTO streamDTO)
+        public async Task<ActionResult> Update(SchoolClassDTO schoolClassDTO)
         {
             try
             {
-                var results = await streamService.Update(streamDTO);
+                var results = await schoolClassService.Update(schoolClassDTO);
 
                 if (results != null)
                 {
@@ -73,11 +73,11 @@ namespace Manager.Areas.Administrator.Controllers
         {
             try
             {
-                var data = await streamService.GetById(Id);
+                var data = await schoolClassService.GetById(Id);
 
                 if (data != null)
                 {
-                    StreamDTO file = new StreamDTO
+                    SchoolClassDTO file = new SchoolClassDTO
                     {
                         Id = data.Id,
 
@@ -103,8 +103,5 @@ namespace Manager.Areas.Administrator.Controllers
                 return null;
             }
         }
-
-
-
     }
 }

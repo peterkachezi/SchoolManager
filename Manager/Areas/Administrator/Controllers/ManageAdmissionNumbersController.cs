@@ -1,5 +1,5 @@
-﻿using Manager.Data.DTOs.StreamModule;
-using Manager.Data.Services.StreamModule;
+﻿using Manager.Data.DTOs.AdmSettingModule;
+using Manager.Data.Services.AdmSettingModule;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,30 +10,30 @@ using System.Web.Mvc;
 
 namespace Manager.Areas.Administrator.Controllers
 {
-    public class StreamsController : Controller
+    public class ManageAdmissionNumbersController : Controller
     {
-        private readonly IStreamService streamService;
-        public StreamsController(IStreamService streamService)
+        private readonly IAdmSettingService  admSettingService;
+        public ManageAdmissionNumbersController(IAdmSettingService admSettingService)
         {
-            this.streamService = streamService;
+            this.admSettingService = admSettingService;
         }
         public ActionResult Index()
         {
             return View();
         }
-        public async Task<ActionResult> Create(StreamDTO streamDTO)
+        public async Task<ActionResult> Create(AdmSettingDTO admSettingDTO)
         {
             try
             {
                 var user = User.Identity.GetUserId();
 
-                streamDTO.CreatedBy = user;
+                admSettingDTO.CreatedBy = user;
 
-                var results = await streamService.Create(streamDTO);
+                var results = await admSettingService.Create(admSettingDTO);
 
                 if (results != null)
                 {
-                    return Json(new { success = true, responseText = "Stream has been successfully created" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = true, responseText = "Class has been successfully created" }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -47,11 +47,11 @@ namespace Manager.Areas.Administrator.Controllers
                 return null;
             }
         }
-        public async Task<ActionResult> Update(StreamDTO streamDTO)
+        public async Task<ActionResult> Update(AdmSettingDTO admSettingDTO)
         {
             try
             {
-                var results = await streamService.Update(streamDTO);
+                var results = await admSettingService.Update(admSettingDTO);
 
                 if (results != null)
                 {
@@ -73,15 +73,19 @@ namespace Manager.Areas.Administrator.Controllers
         {
             try
             {
-                var data = await streamService.GetById(Id);
+                var data = await admSettingService.GetById(Id);
 
                 if (data != null)
                 {
-                    StreamDTO file = new StreamDTO
+                    AdmSettingDTO file = new AdmSettingDTO
                     {
                         Id = data.Id,
 
                         Name = data.Name,
+
+                        IsAuto = data.IsAuto,
+
+                        AffectedClass = data.AffectedClass,
 
                         CreateDate = data.CreateDate,
 
@@ -103,8 +107,5 @@ namespace Manager.Areas.Administrator.Controllers
                 return null;
             }
         }
-
-
-
     }
 }
